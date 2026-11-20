@@ -1,0 +1,61 @@
+:root {
+  --paper: #eef1ed;
+  --ink: #16211f;
+  --muted: #5d6b67;
+  --line: #cdd6d0;
+  --panel: #f8faf7;
+  --signal: #0b6b57;
+  --warn: #a4471f;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101716;
+    --ink: #e8efeb;
+    --muted: #98a8a2;
+    --line: #2b3835;
+    --panel: #172120;
+    --signal: #5fd1b2;
+    --warn: #e59a72;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); }
+body { font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.5; }
+button, input { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+
+.shell { max-width: 960px; margin: 0 auto; padding: 20px 16px 40px; }
+h1 { font-size: 1.5rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+.sub { color: var(--muted); margin: 0 0 16px; max-width: 60ch; }
+
+.stage { position: relative; border-radius: 14px; overflow: hidden; background: #000; aspect-ratio: 4 / 3; }
+.stage video, .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+
+/* The caption bar is the one loud element */
+.caption {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 18px 20px; min-height: 84px;
+  background: rgba(0, 0, 0, 0.78); color: #fff;
+  font-size: clamp(1.4rem, 5vw, 2.4rem); font-weight: 700; line-height: 1.2;
+  display: flex; align-items: center;
+}
+.caption.idle { color: #b8c4bf; font-weight: 400; font-size: 1.1rem; }
+
+.status { position: absolute; top: 10px; left: 10px; z-index: 2; background: rgba(0,0,0,.65); color: #fff; padding: 4px 10px; border-radius: 999px; font-size: .85rem; }
+
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0; }
+.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 10px 14px; cursor: pointer; min-height: 44px; }
+.btn.primary { background: var(--signal); color: var(--paper); border-color: var(--signal); font-weight: 700; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+input[type="text"] { border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 10px 12px; min-height: 44px; min-width: 0; flex: 1 1 160px; }
+
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 14px; }
+.panel h2 { font-size: 1rem; margin: 0 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .9rem; }
+.hint { color: var(--muted); font-size: .92rem; margin: 6px 0 0; }
+.error { color: var(--warn); font-weight: 700; }
+.log { margin: 0; padding-left: 18px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
